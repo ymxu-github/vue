@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>测试</title>
+</head>
+<body style="margin: 0; padding: 0;">
+	<div id="app">
+		<my-header></my-header>
+		<my-body></my-body>
+	</div>
+
+	<script type="text/template" id="header">
+		<div v-bind:style="styleObject">我是头部</div>
+	</script>
+
+	<script type="text/template" id="body">
+		<div v-bind:style="styleObject">
+			<my-nav></my-nav>
+			<my-main></my-main>
+		</div>
+	</script>
+	<script type="text/template" id="nav">
+		<div v-bind:style="styleObject.navStyle">
+			我是导航栏
+			<ol v-bind:style="styleObject.olStyle">
+				<todo-item
+					v-for="item in list"
+					v-bind:todo="item"
+					v-bind:key="item.id"
+					v-bind:id="item.id"></todo-item>
+			</ol>
+		</div>
+	</script>
+
+	<script type="text/template" id="main">
+		<div v-bind:style="styleObject">
+			<div> {{message1}} </div>
+
+			<p v-bind:title="message2">
+				鼠标悬停几秒钟查看此处动态绑定的提示信息！
+			</p>
+
+			<p v-if="seen">is can look? -- {{seen}}</p>
+
+			<p v-for="(d, index) in data">{{index + 1}}、{{d.text}}</p>
+
+			<button v-on:click="reverseMessage">反转消息</button>
+			<span>{{message3}}</span>
+
+			<p></p>
+
+			<input type="text" v-model="message4"><span>{{message4}}</span>
+
+			<p></p>
+
+			<button v-on:click="loadCgi()">调用接口</button>
+
+			<p></p>
+
+			<input type="checkbox" id="checkbox" v-model="checked">
+			<label for="checkbox">{{ checked }}</label>
+
+			<p></p>
+
+			<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+			<label for="jack">Jack</label>
+			<input type="checkbox" id="john" value="John" v-model="checkedNames">
+			<label for="john">John</label>
+			<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+			<label for="mike">Mike</label>
+			<br>
+			<span>Checked names: {{ checkedNames }}</span>
+
+			<p>
+			    <router-link to="/foo">Go to Foo</router-link>
+			    <router-link to="/bar">Go to Bar</router-link>
+		  	</p>
+		  	<router-view></router-view>
+		</div>
+	</script>
+
+	<script type="text/javascript" src="js/vue/vue.js"></script>
+	<script type="text/javascript" src="js/vue-router/vue-router.min.js"></script>
+	<script type="text/javascript" src="js/axios/axios.js"></script>
+	<script type="text/javascript" type="module" src="index.js"></script>
+</body>
+</html>
